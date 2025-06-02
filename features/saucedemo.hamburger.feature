@@ -3,11 +3,12 @@ Feature: Saucedemo hamburger menu
     I want to be able to navigate using the hamburger menu 
     To access the different functionalities of the application
     
-Scenario: Background
-    Given que estoy en la página de login "https://www.saucedemo.com"
-    When ingreso credenciales válidas
-    And hago clic en el botón "Login"
-    Then debería estar en la vista principal de Swag Labs
+Background
+	Given I am on the login page
+	When I enter "<username>" in the Username field
+	And I enter "<password>" in the Password field
+	And I click on the Login button
+	Then I should be able to see the Product page
     And debería ver el menú hamburguesa disponible
 
 Scenario: Navegar a All Items desde el menú hamburguesa
