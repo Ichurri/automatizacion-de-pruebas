@@ -22,7 +22,7 @@ Feature: Catalog interaction
       And I click the Remove button for the item "backpack"
       Then the cart icon should not be visible
 
-    @test
+    @catalog
     Scenario: View item details before adding to cart
       Given I am on the homepage
       When I click the item name Sauce Labs Backpack
