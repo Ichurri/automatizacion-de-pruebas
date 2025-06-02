@@ -1,16 +1,38 @@
-Feature: Cart functionality
+Feature: Catalog interaction
   As a Saucedemo user
-  I want to view and manage my cart
-  So I can proceed with correct items
+  I want to interact with the product catalog
+  So I can add items to my shopping cart
 
   Background:
     Given I am on the login page
-    When I enter "standard_user" in the Username field
+    And I enter "standard_user" in the Username field
     And I enter "secret_sauce" in the Password field
     And I click on the Login button
-    And I click the first item on upper left
 
-  @cart
-  Scenario: View cart and proceed to checkout
-    When I click on the cart icon on upper right
-    Then I should see the selected item in the cart
+    @catalog
+    Scenario: Add item to cart from the catalog
+      Given I am on the homepage
+      When I click the Add to cart for the item "backpack"
+      Then the cart icon should show 1 items
+
+    @catalog
+    Scenario: Remove item from cart in the catalog page
+      Given I am on the homepage
+      When I click the Add to cart for the item "backpack"
+      And I click the Remove button for the item "backpack"
+      Then the cart icon should not be visible
+
+    @test
+    Scenario: View item details before adding to cart
+      Given I am on the homepage
+      When I click the item name Sauce Labs Backpack
+      Then I should be on the item detail page for Sauce Labs Backpack
+      When I click the Add to cart button on the item detail page
+      Then the cart icon should show 1 items
+
+    @catalog
+    Scenario: Add multiple items to cart
+      Given I am on the homepage
+      When I click the Add to cart for the item "backpack"
+      And I click the Add to cart for the item "bike-light"
+      Then the cart icon should show 2 items
