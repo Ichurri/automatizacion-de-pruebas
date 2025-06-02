@@ -38,7 +38,6 @@ Este proyecto implementa un framework de automatización de pruebas para la apli
 - ✅ **Logout de usuarios** - Cerrado de sesión para usuarios
 - ✅ **Catologo de productos** - Interacción con el catálogo de productos
 - ✅ **Filtrado de productos** - Pruebas de funcionalidad de filtros
-- ✅ **Carrito de compras** - Pruebas de funcionalidad de filtros
 - ✅ **Carrito de compras** - Pruebas a funcionamiento del carrito de compras
 - ✅ **Chechout en una compra** - Pruebas al proceso de checkout de una compra
 - ✅ **Menú hamburguesa** - Validación de navegación lateral

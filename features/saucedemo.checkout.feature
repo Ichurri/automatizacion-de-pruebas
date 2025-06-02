@@ -5,7 +5,7 @@ Feature: Checkout process
 
   Background:
     Given I am on the login page
-    When I enter "standard_user" in the Username field
+    And I enter "standard_user" in the Username field
     And I enter "secret_sauce" in the Password field
     And I click on the Login button
     And I click the first item on upper left
