@@ -52,7 +52,7 @@ Scenario: Cambiar entre diferentes filtros
     And el filtro anterior debería ser reemplazado por el nuevo
     And debería ver todos los productos con el nuevo ordenamiento
 
-Scenario: Verificar que los filtros mantienen todos los productos
+Scenario Outline: Verificar que los filtros mantienen todos los productos
     Given que estoy en la vista del inventario
     And cuento el número total de productos mostrados
     When aplico el filtro "<filtro>"

@@ -12,6 +12,7 @@ Feature: Checkout process
     And I click on the cart icon on upper right
     And I click the checkout button
 
+  @maximize
   @checkout
   Scenario: Successful checkout with valid data
     When I fill First Name with "Juan"
@@ -21,6 +22,7 @@ Feature: Checkout process
     And I click on the Finish Button
     Then I should see a message confirming my purchase
 
+  @maximize
   @checkout
   Scenario Outline: Checkout with missing required fields
     When I fill First Name with "<first_name>"
@@ -35,11 +37,13 @@ Feature: Checkout process
       | Juan       |           | 591      | Error: Last Name is required   |
       | Juan       | Perez     |          | Error: Postal Code is required |
 
+  @maximize
   @checkout
   Scenario: Cancel checkout from information page
     When I click on the Cancel button
     Then I should be on the cart page
 
+  @maximize
   @checkout
   Scenario: Cancel checkout from overview page
     When I fill First Name with "Juan"
