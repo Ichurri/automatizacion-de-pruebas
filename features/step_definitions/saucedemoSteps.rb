@@ -20,6 +20,10 @@ Then('I should be able to see the Product page') do
 end
 
 #Catalog
+Given('I am on the homepage') do
+  expect(page).to have_selector(:css, "#header_container > div.header_secondary_container > span")
+end
+
 Then('the cart icon should show {int} items') do |count|
   expect(find(:css, '.shopping_cart_badge').text).to eq(count.to_s)
 end
@@ -54,6 +58,27 @@ end
 
 
 #Cart
+When('I click on the cart icon on upper right') do
+    find(:css, '#shopping_cart_container > a').click
+end
+
+When('I click the Continue Shopping button') do
+  click_button('continue-shopping')
+end
+
+When('I click the Remove button for the item {string} on the cart page') do |item|
+  button_id = 'remove-sauce-labs-' + item
+  click_button(button_id)
+end
+
+Then('I should not see the selected item in the cart') do
+  expect(page).to have_no_content('Sauce Labs Backpack')
+end
+
+Then('I should see the item {string} in the cart') do |item_name|
+  expect(page).to have_content(item_name)
+end
+
 Then('I should see the selected item in the cart') do
   expect(page).to have_content('Sauce Labs Backpack')
 end
@@ -61,16 +86,13 @@ end
 
 
 
+
 # Purchase
-Given('I am on the homepage') do
-  expect(page).to have_selector(:css, "#header_container > div.header_secondary_container > span")
-end
 
 
-When('I click on the cart icon on upper right') do
-    find(:css, '#shopping_cart_container > a').click
-end
 
+
+# Checkout
 When('I click the checkout button') do
     click_button('checkout')
 end
