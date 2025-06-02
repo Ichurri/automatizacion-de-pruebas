@@ -19,6 +19,18 @@ Then('I should be able to see the Product page') do
   expect(page).to have_selector(:css, "#header_container > div.header_secondary_container > span")
 end
 
+#Catalog
+Then('the cart icon should show {int} item') do |count|
+  expect(find(:css, '.shopping_cart_badge').text).to eq(count.to_s)
+end
+
+#Cart
+Then('I should see the selected item in the cart') do
+  expect(page).to have_content('Sauce Labs Backpack')
+end
+
+
+
 
 # Purchase
 Given('I am on the homepage') do
