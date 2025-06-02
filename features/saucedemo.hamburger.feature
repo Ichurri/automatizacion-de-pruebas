@@ -5,8 +5,8 @@ Feature: Saucedemo hamburger menu
     
 Background
 	Given I am on the login page
-	When I enter "<username>" in the Username field
-	And I enter "<password>" in the Password field
+	When I enter "standard_user" in the Username field
+	And I enter "secret_sauce" in the Password field
 	And I click on the Login button
 	Then I should be able to see the Product page
     And debería ver el menú hamburguesa disponible
