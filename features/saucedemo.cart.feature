@@ -10,11 +10,13 @@ Feature: Cart functionality
     And I click on the Login button
     And I click the Add to cart for the item "backpack"
 
+  @maximize
   @cart
   Scenario: View cart and proceed to checkout
     When I click on the cart icon on upper right
     Then I should see the selected item in the cart
 
+  @maximize
   @cart
   Scenario: Remove item from cart on the cart page
     When I click on the cart icon on upper right
@@ -22,12 +24,14 @@ Feature: Cart functionality
     Then I should not see the selected item in the cart
 
   @cart
+  @maximize
   Scenario: Add multiple items and view them in the cart
     When I click the Add to cart for the item "bike-light"
     And I click on the cart icon on upper right
     Then I should see the item "Sauce Labs Backpack" in the cart
     And I should see the item "Sauce Labs Bike Light" in the cart
 
+  @maximize
   @cart
   Scenario: Continue shopping from the cart page
     When I click on the cart icon on upper right
