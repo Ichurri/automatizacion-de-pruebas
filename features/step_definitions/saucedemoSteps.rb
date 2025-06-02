@@ -84,14 +84,6 @@ Then('I should see the selected item in the cart') do
 end
 
 
-
-
-
-# Purchase
-
-
-
-
 # Checkout
 When('I click the checkout button') do
     click_button('checkout')
@@ -119,4 +111,16 @@ end
 
 Then('I should see a message confirming my purchase') do
     expect(page).to have_content('Your order has been dispatched, and will arrive just as fast as the pony can get there!')
+end
+
+Then('I should see an error message {string}') do |error_message|
+  expect(page).to have_content(error_message)
+end
+
+When('I click on the Cancel button') do
+  click_button('cancel')
+end
+
+Then('I should be on the cart page') do
+  expect(page).to have_current_path('https://www.saucedemo.com/cart.html')
 end
