@@ -2,15 +2,15 @@ begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations
 require 'capybara'
 require 'capybara/dsl'
 require 'capybara/cucumber'
-require 'capybara-screenshot/cucumber'
-require 'selenium-webdriver'  # <--- Esta línea es crucial
+# require 'capybara-screenshot/cucumber'
+require 'selenium-webdriver' 
 
 # PTravel Settings
 ENV['USER'] = "Pepazo"
 ENV['PSW'] = "ILoveQA"
 
 # Configuraciones generales
-Capybara.default_max_wait_time = 15
+Capybara.default_max_wait_time = 5
 Capybara.app_host = "https://cba.ucb.edu.bo/"
 Capybara.run_server = false
 
