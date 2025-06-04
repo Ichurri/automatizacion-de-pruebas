@@ -12,43 +12,82 @@ Feature: Checkout process
     And I click on the cart icon on upper right
     And I click the checkout button
 
-  @maximize
-  @checkout
-  Scenario: Successful checkout with valid data
-    When I fill First Name with "Juan"
-    And I Last Name with "Perez"
-    And I Zip/Postal Code with "591"
-    And I click on the Continue button
-    And I click on the Finish Button
-    Then I should see a message confirming my purchase
+    @maximize
+    @checkout
+    Scenario: Successful checkout with valid data
+      When I fill First Name with "Juan"
+      And I Last Name with "Perez"
+      And I Zip/Postal Code with "591"
+      And I click on the Continue button
+      And I click on the Finish Button
+      Then I should see a message confirming my purchase
 
-  @maximize
-  @checkout
-  Scenario Outline: Checkout with missing required fields
-    When I fill First Name with "<first_name>"
-    And I Last Name with "<last_name>"
-    And I Zip/Postal Code with "<zip_code>"
-    And I click on the Continue button
-    Then I should see an error message "<error_message>"
+    @maximize
+    @checkout
+    Scenario Outline: Checkout with missing required fields
+      When I fill First Name with "<first_name>"
+      And I Last Name with "<last_name>"
+      And I Zip/Postal Code with "<zip_code>"
+      And I click on the Continue button
+      Then I should see an error message "<error_message>"
 
-    Examples:
-      | first_name | last_name | zip_code | error_message                  |
-      |            | Perez     | 591      | Error: First Name is required  |
-      | Juan       |           | 591      | Error: Last Name is required   |
-      | Juan       | Perez     |          | Error: Postal Code is required |
+      Examples:
+        | first_name | last_name | zip_code | error_message                  |
+        |            | Perez     | 591      | Error: First Name is required  |
+        | Juan       |           | 591      | Error: Last Name is required   |
+        | Juan       | Perez     |          | Error: Postal Code is required |
 
-  @maximize
-  @checkout
-  Scenario: Cancel checkout from information page
-    When I click on the Cancel button
-    Then I should be on the cart page
+    @maximize
+    @checkout
+    Scenario: Cancel checkout from information page
+      When I click on the Cancel button
+      Then I should be on the cart page
 
-  @maximize
-  @checkout
-  Scenario: Cancel checkout from overview page
-    When I fill First Name with "Juan"
-    And I Last Name with "Perez"
-    And I Zip/Postal Code with "591"
-    And I click on the Continue button
-    And I click on the Cancel button
-    Then I should be able to see the Product page
+    @maximize
+    @checkout
+    Scenario: Navigating back from overview returns to cart
+      When I fill First Name with "Juan"
+      And I Last Name with "Perez"
+      And I Zip/Postal Code with "591"
+      And I click on the Continue button
+      And I click on the Cancel button
+      Then I should be able to see the Product page
+
+    @maximize
+    @checkout
+    Scenario: Cancel checkout from overview page
+      When I fill First Name with "Juan"
+      And I Last Name with "Perez"
+      And I Zip/Postal Code with "591"
+      And I click on the Continue button
+      And I click on the Cancel button
+      Then I should be able to see the Product page
+
+    @maximize
+    @checkout
+    Scenario: Verify item price and total in the price total overview
+      When I fill First Name with "Juan"
+      And I Last Name with "Perez"
+      And I Zip/Postal Code with "591"
+      And I click on the Continue button
+      Then I should see the item total is "$29.99"
+      And the tax should be "$2.40"
+      And the total should be "$32.39"
+
+    @maximize
+    @checkout
+    Scenario: Verify individual item prices and subtotal in checkout overview
+      And I click on the Cancel button
+      And I click the Continue Shopping button
+      And I click the Add to cart for the item "bike-light"
+      And I click on the cart icon on upper right
+      And I click the checkout button
+      And I fill First Name with "Juan"
+      And I Last Name with "Perez"
+      And I Zip/Postal Code with "591"
+      And I click on the Continue button
+      Then I should see the item "Sauce Labs Backpack" priced at "$29.99"
+      And I should see the item "Sauce Labs Bike Light" priced at "$9.99"
+      And the item subtotal should be "$39.98"
+      And the tax should be "$3.20"
+      And the total should be "$43.18"
