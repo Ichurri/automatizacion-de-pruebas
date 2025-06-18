@@ -51,7 +51,7 @@ Feature: Checkout process
       And I Zip/Postal Code with "591"
       And I click on the Continue button
       And I click on the Cancel button
-      Then I should be able to see the Product page
+      Then I should be able to see the main page with the catalog of products
 
     @maximize
     @checkout
@@ -61,7 +61,7 @@ Feature: Checkout process
       And I Zip/Postal Code with "591"
       And I click on the Continue button
       And I click on the Cancel button
-      Then I should be able to see the Product page
+      Then I should be able to see the main page with the catalog of products
 
     @maximize
     @checkout
@@ -70,9 +70,9 @@ Feature: Checkout process
       And I Last Name with "Perez"
       And I Zip/Postal Code with "591"
       And I click on the Continue button
-      Then I should see the item total is "$29.99"
-      And the tax should be "$2.40"
-      And the total should be "$32.39"
+      Then I should see the item total is "29.99" dollars
+      And the tax should be "2.40" dollars
+      And the total price should match the sum of subtotal and tax
 
     @maximize
     @checkout
@@ -88,6 +88,6 @@ Feature: Checkout process
       And I click on the Continue button
       Then I should see the item "Sauce Labs Backpack" priced at "$29.99"
       And I should see the item "Sauce Labs Bike Light" priced at "$9.99"
-      And the item subtotal should be "$39.98"
-      And the tax should be "$3.20"
-      And the total should be "$43.18"
+      And the item subtotal should be "39.98" dollars
+      And the tax should be "3.20" dollars
+      And the total price should match the sum of subtotal and tax

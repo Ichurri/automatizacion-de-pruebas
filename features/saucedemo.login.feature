@@ -9,7 +9,7 @@ Scenario Outline: Login to Saucedemo as a normal user
 	When I enter "<username>" in the Username field
 	And I enter "<password>" in the Password field
 	And I click on the Login button
-	Then I should be able to see the Product page
+	Then I should be able to see the main page with the catalog of products
 
 Examples:
   | username                | password      | 

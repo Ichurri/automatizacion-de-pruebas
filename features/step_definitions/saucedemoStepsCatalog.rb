@@ -1,4 +1,4 @@
-Given('I am on the homepage') do
+Given('I am on the Products page') do
   expect(page).to have_selector(:css, "#header_container > div.header_secondary_container > span")
 end
 

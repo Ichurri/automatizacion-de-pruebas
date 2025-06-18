@@ -8,10 +8,11 @@ require 'selenium-webdriver'
 # PTravel Settings
 ENV['USER'] = "Pepazo"
 ENV['PSW'] = "ILoveQA"
+ENV['TAX_RATE'] = '0.08'
 
 # Configuraciones generales
 Capybara.default_max_wait_time = 5
-Capybara.app_host = "https://cba.ucb.edu.bo/"
+Capybara.app_host = "https://www.saucedemo.com"
 Capybara.run_server = false
 
 # Clase para registrar drivers

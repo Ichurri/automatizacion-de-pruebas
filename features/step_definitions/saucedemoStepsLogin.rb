@@ -14,6 +14,6 @@ When('I click on the Login button') do
     click_button('login-button')
 end
 
-Then('I should be able to see the Product page') do
+Then('I should be able to see the main page with the catalog of products') do
   expect(page).to have_selector(:css, "#header_container > div.header_secondary_container > span", text: "Products")
 end

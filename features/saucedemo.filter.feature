@@ -3,99 +3,111 @@ Feature: Filter items
     I want to be able to filter the products of the inventory 
     To easily find the products I am looking for according to different criteria
 
-Background
+Background:
     Given I am on the login page
     And I enter "standard_user" in the Username field
     And I enter "secret_sauce" in the Password field
     And I click on the Login button
-    And I click the Add to cart for the item "backpack"
-    And debería ver todos los productos disponibles
-    And debería ver el dropdown de filtros disponible
-    And que estoy en la vista del inventario
+    And I click the Add to cart for the item "Sauce Labs Backpack"
+    And I should see all available products displayed
+    And I should see the filter dropdown is available
+    And I am on the inventory page
 
 
-Scenario: Filtrar productos por nombre de A a Z
-    When hago clic en el dropdown de filtros
-    And selecciono "Name (A to Z)"
-    Then los productos deberían ordenarse alfabéticamente de A a Z
-    And el filtro seleccionado debería mostrarse como "Name (A to Z)"
+Scenario: Filter products by name from A to Z
+    When I click on the filter dropdown
+    And I select "Name (A to Z)"
+    Then the products should be sorted alphabetically from A to Z
+    And the filter dropdown should display "Name (A to Z)" as selected
+    And the first product name should start with a letter that comes before the last product name alphabetically
 
-Scenario: Filtrar productos por nombre de Z a A
-    When hago clic en el dropdown de filtros
-    And selecciono "Name (Z to A)"
-    Then los productos deberían ordenarse alfabéticamente de Z a A
-    And el primer producto debería comenzar con una letra posterior al último producto
-    And el filtro seleccionado debería mostrarse como "Name (Z to A)"
 
-Scenario: Filtrar productos por precio de menor a mayor
-    When hago clic en el dropdown de filtros
-    And selecciono "Price (low to high)"
-    Then los productos deberían ordenarse por precio ascendente
-    And el precio del primer producto debería ser menor o igual al precio del último producto
-    And el filtro seleccionado debería mostrarse como "Price (low to high)"
+Scenario: Filter products by name from Z to A
+    When I click on the filter dropdown
+    And I select "Name (Z to A)"
+    Then the products should be sorted alphabetically from Z to A in descending order
+    And the first product name should start with a letter that comes after the last product name alphabetically
+    And the filter dropdown should display "Name (Z to A)" as selected
 
-Scenario: Filtrar productos por precio de mayor a menor
-    When hago clic en el dropdown de filtros
-    And selecciono "Price (high to low)"
-    Then los productos deberían ordenarse por precio descendente
-    And el precio del primer producto debería ser mayor o igual al precio del último producto
-    And el filtro seleccionado debería mostrarse como "Price (high to low)"
 
-Scenario: Cambiar entre diferentes filtros
-    And he aplicado el filtro "Name (A to Z)"
-    When cambio el filtro a "Price (low to high)"
-    Then los productos deberían reordenarse según el nuevo filtro aplicado
-    And el filtro anterior debería ser reemplazado por el nuevo
-    And debería ver todos los productos con el nuevo ordenamiento
+Scenario: Filter products by price from low to high
+    When I click on the filter dropdown
+    And I select "Price (low to high)"
+    Then the products should be sorted by price in ascending order
+    And each product price should be less than or equal to the next product price
+    And the filter dropdown should display "Price (low to high)" as selected
 
-Scenario Outline: Verificar que los filtros mantienen todos los productos
-    And cuento el número total de productos mostrados
-    When aplico el filtro "<filtro>"
-    Then debería ver la misma cantidad de productos
-    And ningún producto debería desaparecer o duplicarse
-    And solo el orden de los productos debería cambiar
+
+Scenario: Filter products by price from high to low
+    When I click on the filter dropdown
+    And I select "Price (high to low)"
+    Then the products should be sorted by price in descending order
+    And each product price should be greater than or equal to the next product price
+    And the filter dropdown should display "Price (high to low)" as selected
+
+
+Scenario: Switch between different filters
+    Given I have applied the "Name (A to Z)" filter
+    When I change the filter to "Price (low to high)"
+    Then the products should be reordered according to price from low to high
+    And the filter dropdown should show "Price (low to high)" as selected
+    And all products should remain visible with the new sorting applied
+
+
+Scenario Outline: Verify that filters maintain all products visible
+    Given I count the total number of products displayed on the page
+    When I apply the "<filter>" filter
+    Then I should see the exact same number of products as before filtering
+    And no product should be hidden or duplicated
+    And only the display order of the products should change
 
 Examples:
-  | filtro              |
+  | filter              |
   | Name (A to Z)       |
   | Name (Z to A)       |
   | Price (low to high) |
   | Price (high to low) |
 
-Scenario Outline: Validar todos los filtros disponibles
-    When hago clic en el dropdown de filtros
-    Then debería ver la opción "<opcion_filtro>" disponible
-    And debería poder seleccionar "<opcion_filtro>"
+
+Scenario Outline: Validate all filter options are available and selectable
+    When I click on the filter dropdown
+    Then I should see the option "<filter_option>" in the dropdown list
+    And I should be able to click and select "<filter_option>"
 
 Examples:
-  | opcion_filtro       |
+  | filter_option       |
   | Name (A to Z)       |
   | Name (Z to A)       |
   | Price (low to high) |
   | Price (high to low) |
 
-Scenario: Verificar orden por defecto al cargar la página
-    Given que estoy en la vista del inventario
-    Then los productos deberían mostrarse en el orden por defecto
-    And el filtro debería mostrar la Name (A to Z)
-    And debería ver todos los productos disponibles
 
-Scenario: Validar orden alfabético correcto (A to Z)
-    When aplico el filtro "Name (A to Z)"
-    Then el producto "Sauce Labs Backpack" debería aparecer antes que "Sauce Labs Onesie"
-    And los nombres de productos deberían seguir el orden alfabético estricto
-    And no debería haber errores en la secuencia alfabética
+Scenario: Verify default product order when first loading the page
+    Given I am on the inventory page for the first time
+    Then the products should be displayed in alphabetical order by name (A to Z)
+    And the filter dropdown should show "Name (A to Z)" as the default selection
+    And all available products should be visible
 
-Scenario: Validar orden de precios correcto (low to high)
-    When aplico el filtro "Price (low to high)"
-    Then debería obtener los precios de todos los productos visibles
-    And cada precio debería ser menor o igual al siguiente precio en la lista
-    And el producto más barato debería aparecer primero
-    And el producto más caro debería aparecer último
 
-Scenario: Verificar persistencia del filtro al navegar
-    And he aplicado el filtro "Price (high to low)"
-    When hago clic en un producto para ver sus detalles
-    And regreso a la vista del inventario usando el botón "Back to products"
-    Then el filtro "Price (high to low)" debería seguir aplicado
-    And los productos deberían mantener el orden por precio descendente
+Scenario: Validate correct alphabetical ordering A to Z
+    When I apply the "Name (A to Z)" filter
+    Then the product "Sauce Labs Backpack" should appear before "Sauce Labs Onesie" in the list
+    And all product names should be in strict alphabetical ascending order
+    And no product should be out of alphabetical sequence
+
+
+Scenario: Validate correct price ordering from low to high
+    When I apply the "Price (low to high)" filter
+    Then I should extract the price values from all visible products
+    And each product price should be numerically less than or equal to the following product price
+    And the product with the lowest price should appear first in the list
+    And the product with the highest price should appear last in the list
+
+
+Scenario: Verify filter selection persists after product navigation
+    Given I have applied the "Price (high to low)" filter
+    And the products are sorted by price from high to low
+    When I click on any product to view its details page
+    And I click the "Back to products" button to return to inventory
+    Then the filter dropdown should still show "Price (high to low)" as selected
+    And the products should maintain their descending price order
