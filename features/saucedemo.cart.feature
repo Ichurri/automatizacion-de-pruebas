@@ -36,5 +36,5 @@ Feature: Cart functionality
   Scenario: Continue shopping from the cart page
     When I click on the cart icon on upper right
     And I click the Continue Shopping button
-    Then I should be able to see the Product page
+    Then I should be able to see the main page with the catalog of products
 

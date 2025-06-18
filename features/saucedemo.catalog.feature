@@ -12,14 +12,14 @@ Feature: Catalog interaction
     @maximize
     @catalog
     Scenario: Add item to cart from the catalog
-      Given I am on the homepage
+      Given I am on the Products page
       When I click the Add to cart for the item "backpack"
       Then the cart icon should show 1 items
 
     @maximize
     @catalog
     Scenario: Remove item from cart in the catalog page
-      Given I am on the homepage
+      Given I am on the Products page
       When I click the Add to cart for the item "backpack"
       And I click the Remove button for the item "backpack"
       Then the cart icon should not be visible
@@ -27,7 +27,7 @@ Feature: Catalog interaction
     @maximize
     @catalog
     Scenario: View item details before adding to cart
-      Given I am on the homepage
+      Given I am on the Products page
       When I click the item name Sauce Labs Backpack
       Then I should be on the item detail page for Sauce Labs Backpack
       When I click the Add to cart button on the item detail page
@@ -36,7 +36,7 @@ Feature: Catalog interaction
     @maximize
     @catalog
     Scenario: Add multiple items to cart
-      Given I am on the homepage
+      Given I am on the Products page
       When I click the Add to cart for the item "backpack"
       And I click the Add to cart for the item "bike-light"
       Then the cart icon should show 2 items
