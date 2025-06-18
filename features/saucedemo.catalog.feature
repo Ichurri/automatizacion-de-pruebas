@@ -11,6 +11,7 @@ Feature: Catalog interaction
 
     @maximize
     @catalog
+    @smoke
     Scenario: Add item to cart from the catalog
       Given I am on the Products page
       When I click the Add to cart for the item "backpack"
@@ -18,6 +19,7 @@ Feature: Catalog interaction
 
     @maximize
     @catalog
+    @smoke
     Scenario: Remove item from cart in the catalog page
       Given I am on the Products page
       When I click the Add to cart for the item "backpack"

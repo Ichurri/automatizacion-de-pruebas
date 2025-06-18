@@ -14,6 +14,7 @@ Feature: Checkout process
 
     @maximize
     @checkout
+    @smoke
     Scenario: Successful checkout with valid data
       When I fill First Name with "Juan"
       And I Last Name with "Perez"
@@ -24,6 +25,7 @@ Feature: Checkout process
 
     @maximize
     @checkout
+    @smoke
     Scenario Outline: Checkout with missing required fields
       When I fill First Name with "<first_name>"
       And I Last Name with "<last_name>"
@@ -39,6 +41,7 @@ Feature: Checkout process
 
     @maximize
     @checkout
+    @smoke
     Scenario: Cancel checkout from information page
       When I click on the Cancel button
       Then I should be on the cart page
@@ -65,6 +68,7 @@ Feature: Checkout process
 
     @maximize
     @checkout
+    @smoke
     Scenario: Verify item price and total in the price total overview
       When I fill First Name with "Juan"
       And I Last Name with "Perez"

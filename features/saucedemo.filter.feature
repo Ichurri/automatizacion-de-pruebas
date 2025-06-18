@@ -13,7 +13,7 @@ Background:
     And I should see the filter dropdown is available
     And I am on the inventory page
 
-
+@smoke
 Scenario: Filter products by name from A to Z
     When I click on the filter dropdown
     And I select "Name (A to Z)"
