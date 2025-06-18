@@ -4,6 +4,7 @@ Feature: Saucedemo login
    so I am able to shop from the Saucedemo webpage
 
 @maximize
+@smoke
 Scenario Outline: Login to Saucedemo as a normal user
 	Given I am on the login page
 	When I enter "<username>" in the Username field

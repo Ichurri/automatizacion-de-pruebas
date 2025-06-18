@@ -12,12 +12,15 @@ Feature: Cart functionality
 
   @maximize
   @cart
+  @smoke
   Scenario: View cart and proceed to checkout
     When I click on the cart icon on upper right
     Then I should see the selected item in the cart
 
   @maximize
   @cart
+  @clear_cart
+  @smoke
   Scenario: Remove item from cart on the cart page
     When I click on the cart icon on upper right
     And I click the Remove button for the item "backpack" on the cart page
